@@ -2,12 +2,12 @@ import axios from "axios";
 
 // define a function for common api call using axios library
 
-export const commonApi=async(method,url,body,header)=>{
+export const commonApi=async(method,url,data,header)=>{
 
            let config={
             method,
             url,
-            body,
+            data,
             headers:header?header:{"content-type":"application/json"}
            }
 

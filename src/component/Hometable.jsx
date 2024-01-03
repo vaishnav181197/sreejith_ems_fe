@@ -1,11 +1,14 @@
 import React from 'react'
+import { Button } from 'react-bootstrap';
 
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
+import { BASE_URL } from '../service/basrUrl';
 
 
 
-function Hometable() {
+function Hometable({ displayData, removeuser }) {
+    console.log(displayData);
     return (
         <>
 
@@ -28,29 +31,63 @@ function Hometable() {
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark wel</td>
-                            <td>Mark@gmail.com</td>
-                            <td>9846757754</td>
-                            <td>Active</td>
-                            <td><img style={{ width: '70px', height: '70px', borderRadius: '50%' }} src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="no image" /></td>
-                            <td>
 
-                                <span>
+                        {
+                             
+                          displayData.length>0?
 
-                                     <Link to={'/view/:id'}> <i class="fa-solid fa-eye text-success fs-3 me-2 "></i> </Link>
+                          displayData.map((item,index)=>(
 
-                                     <Link to={'/edit/:id'}> <i class="fa-solid fa-pen text-primary fs-3 me-2 "></i> </Link>
+                            <tr>
+                                <td>{index+1}</td>
+                                <td>{item.fname}{item.lname}</td>
+                                <td>{item.email}</td>
+                                <td>{item.mobile}</td>
+                                <td><Button className={item.status==="Active"?"btn btn-success":"btn btn-danger"} >{item.status}</Button>   </td>
+                                <td><img style={{ width: '70px', height: '70px', borderRadius: '50%' }} src={`${BASE_URL}/uploads/${item.profile}`} alt="no image" /></td>
+                                <td>
 
-                                     <span><i class="fa-solid fa-trash fs-3 "></i> </span>
+                                    <span>
+
+                                        <Link to={`/view/${item._id}`}> <i class="fa-solid fa-eye text-success fs-3 me-2 "></i> </Link>
+
+                                        <Link to={`/edit/${item._id}`}> <i class="fa-solid fa-pen text-primary fs-3 me-2 "></i> </Link>
+
+                                        <span onClick={()=>removeuser(item._id)}><i class="fa-solid fa-trash fs-3 "></i> </span>
 
 
 
 
-                                </span>
-                            </td>
-                        </tr>
+                                    </span>
+                                </td>
+                            </tr>
+
+
+
+
+
+
+
+
+
+                          )):<tr className='w-100 text-danger mt-5'>
+
+                           Nothing to Display!!!!!!!
+
+                          </tr>
+
+
+
+                           
+
+
+                        }
+
+
+
+
+
+
 
                     </tbody>
                 </Table>
