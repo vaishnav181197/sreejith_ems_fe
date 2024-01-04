@@ -17,6 +17,7 @@ function Edit() {
   const navigate=useNavigate()
  
    const [showspin, setshowSpin] = useState(true)
+   const [exiuser,setExiUser]=useState({})
   
    // normal inputs
    const [normalUserInput, setNormalUserInput] = useState({
@@ -74,8 +75,8 @@ function Edit() {
     // console.log(data);
 
       let existingUser=data?.find(item => item._id === id)
-     console.log(existingUser);
-     
+     console.log(existingUser,"exi");
+     setExiUser(existingUser)
     
 
 
@@ -84,6 +85,7 @@ function Edit() {
 
    useEffect(()=>{
     getuser()
+    console.log(exiuser,"esxi")
    },[id])
 
 
@@ -179,25 +181,25 @@ function Edit() {
  
                    {/* firstname */}
                    <FloatingLabel className='mb-3 col-lg-6' controlId="floatingInputfname" label="FirstName">
-                     <Form.Control type="text" name='fname' onChange={e => getandsetUserNormalInput(e)} value={normalUserInput.value} placeholder="FirstName" />
+                     <Form.Control type="text" name='fname' onChange={e => getandsetUserNormalInput(e)} value={exiuser.fname} placeholder="FirstName" />
                    </FloatingLabel>
  
                    {/* Lastname */}
  
                    <FloatingLabel className='mb-3 col-lg-6' controlId="floatingInputlname" label="LastName">
-                     <Form.Control name='lname' onChange={e => getandsetUserNormalInput(e)} value={normalUserInput.value} type="text" placeholder="LastName" />
+                     <Form.Control name='lname' onChange={e => getandsetUserNormalInput(e)} value={exiuser.lname} type="text" placeholder="LastName" />
                    </FloatingLabel>
  
                    {/* email */}
  
                    <FloatingLabel className='mb-3 col-lg-6' controlId="floatingInputemail" label="Email">
-                     <Form.Control name='email' onChange={e => getandsetUserNormalInput(e)} value={normalUserInput.value} type="email" placeholder="Email" />
+                     <Form.Control name='email' onChange={e => getandsetUserNormalInput(e)} value={exiuser.email} type="email" placeholder="Email" />
                    </FloatingLabel>
  
                    {/* mobile */}
  
                    <FloatingLabel className='mb-3 col-lg-6' controlId="floatingInputmobile" label="Mobile">
-                     <Form.Control name='mobile' onChange={e => getandsetUserNormalInput(e)} value={normalUserInput.value} type="text" placeholder="Mobile" />
+                     <Form.Control name='mobile' onChange={e => getandsetUserNormalInput(e)} value={exiuser.mobile} type="text" placeholder="Mobile" />
                    </FloatingLabel>
  
  
@@ -233,7 +235,7 @@ function Edit() {
  
                      <Form.Label>Select Employee Status</Form.Label>
  
-                     <Select options={options} onChange={e => setstatus(e.value)} />
+                     <Select options={options} onChange={e => setstatus(e.value)} value={exiuser.status}/>
  
                    </Form.Group>
  
@@ -253,7 +255,7 @@ function Edit() {
  
                      <Form.Label>Employee Location</Form.Label>
  
-                     <Form.Control type="text" name='location' onChange={e => getandsetUserNormalInput(e)} value={normalUserInput.value} placeholder="Employee Location" />
+                     <Form.Control type="text" name='location' onChange={e => getandsetUserNormalInput(e)} value={exiuser.location} placeholder="Employee Location" />
  
                    </Form.Group>
  
